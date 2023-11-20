@@ -3,7 +3,6 @@ from flask import request, jsonify, redirect, url_for
 import sys
 from engine import *
 from character import *
-from requests import *
 
 app = flask.Flask(__name__)
 
@@ -108,7 +107,3 @@ if __name__ == "__main__" :
     arena = Arena(engine._arena)
 
     app.run(debug=False)
-
-    requestApi = Requests()
-    threadEngine = threading.Thread(target=engine.run())
-    threadRequest = threading.Thread(target = Requests.run())
