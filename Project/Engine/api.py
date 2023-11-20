@@ -4,6 +4,9 @@ import sys
 from engine import *
 from character import *
 import threading
+from kafka import KafkaConsumer
+from kafka.errors import NoBrokersAvailable
+import json
 
 app = flask.Flask(__name__)
 
@@ -103,9 +106,21 @@ def getStatusArena(round):
     except Exception as e:
             return f"Erreur interne du serveur : {str(e)}", 500
 
+@app.route('/kafka', methods=['GET'])
+def endPoint():
+    try:
+        consumer = KafkaConsumer(bootstrap_servers='pkc-lzvrd.us-west4.gcp.confluent.cloud:9092', auto_offset_reset='earliest', value_deserializer=lambda m: json.loads(m.decode('utf-8')))
+        consumer.subscribe(['topicJules'])
+        message = next(consumer)
+        return jsonify(message.value)
+    except NoBrokersAvailable as e:
+        return jsonify({"error": f"NoBrokersAvailable - {str(e)}"}), 500
+    except Exception as e:
+        return jsonify({"error": f"Autre erreur - {str(e)}"}), 500
+
 if __name__ == "__main__" :
     engine = Engine()
     arena = Arena(engine._arena)
 
     threadEngine = threading.Thread(target=engine.run()).start
-    threadRequest = threading.Thread(target =  app.run(debug=False)).start
+    threadRequest = threading.Thread(target =  app.run(debug=True)).start
