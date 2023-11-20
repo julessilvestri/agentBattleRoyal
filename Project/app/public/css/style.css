@@ -1,0 +1,35 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    width: 100%;
+}
+
+.get-method{
+    color: dodgerblue;
+}
+
+.post-method{
+    color: red;
+}
+
+.bloc-field{
+    width: 90%;
+    height: 100px;
+    background-color: rgb(233, 233, 233);
+    border-radius: 20px;
+    margin-left: 3%;
+    margin-top: 50px;
+    padding: 2%;
+}
+
+.button-execute{
+    width: 150px;
+    height: 40px;
+    background-color: blue;
+    border: 0;
+    border-radius:10px;
+    color: white;
+}

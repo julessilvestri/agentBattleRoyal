@@ -1,0 +1,85 @@
+{
+    "enter_arena": [
+        [
+            1700122425.6367714,
+            {
+                "cid": "jules",
+                "teamid": "team1",
+                "life": 10,
+                "strength": 20,
+                "armor": 20,
+                "speed": 10,
+                "action": "None",
+                "target": "None",
+                "dead": false
+            }
+        ],
+        [
+            1700122425.636777,
+            {
+                "cid": "amhed",
+                "teamid": "team3",
+                "life": 10,
+                "strength": 10,
+                "armor": 20,
+                "speed": 10,
+                "action": "None",
+                "target": "None",
+                "dead": false
+            }
+        ]
+    ],
+    "gold": [
+        [
+            1700122425.6367729,
+            {
+                "jules": 0
+            }
+        ],
+        [
+            1700122425.6367776,
+            {
+                "amhed": 0
+            }
+        ],
+        [
+            1700122425.6368048,
+            {
+                "jules": 10
+            }
+        ]
+    ],
+    "start_game": [
+        [
+            1700122425.6367898,
+            ""
+        ]
+    ],
+    "damage": [
+        [
+            1700122425.636802,
+            {
+                "character": "jules",
+                "target": "amhed",
+                "damage": 20,
+                "reduced": 0,
+                "dodged": 0
+            }
+        ]
+    ],
+    "death": [
+        [
+            1700122425.6368036,
+            {
+                "character": "amhed",
+                "killer": "jules"
+            }
+        ]
+    ],
+    "turn_id": [
+        [
+            1700122425.63681,
+            1
+        ]
+    ]
+}
