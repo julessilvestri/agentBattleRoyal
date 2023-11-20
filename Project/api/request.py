@@ -34,6 +34,17 @@ characterData = {
 
 makeRequest("http://127.0.0.1:5000/character/join", characterData)
 
+characterData = {
+        "cid": "Anis",
+        "team": "team3",
+        "life": 10,
+        "strength": 5,
+        "armor": 3,
+        "speed": 17
+    }
+
+makeRequest("http://127.0.0.1:5000/character/join", characterData)
+
 action_data = {
     "cid": "Jules",
     "action": "ACTION.HIT",
