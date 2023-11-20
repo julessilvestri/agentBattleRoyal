@@ -3,6 +3,7 @@ from flask import request, jsonify, redirect, url_for
 import sys
 from engine import *
 from character import *
+from requests import *
 
 app = flask.Flask(__name__)
 
@@ -98,7 +99,6 @@ def getAllPlayer():
 @app.route('/status/<round>', methods=['GET'])
 def getStatusArena(round):
     try:
-        engine = Engine()
         return engine.getState()
     except Exception as e:
             return f"Erreur interne du serveur : {str(e)}", 500
@@ -106,5 +106,9 @@ def getStatusArena(round):
 if __name__ == "__main__" :
     engine = Engine()
     arena = Arena(engine._arena)
+
     app.run(debug=False)
-    engine.run()
+
+    requestApi = Requests()
+    threadEngine = threading.Thread(target=engine.run())
+    threadRequest = threading.Thread(target = Requests.run())
