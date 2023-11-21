@@ -9,9 +9,11 @@ from kafka.errors import NoBrokersAvailable
 from kafka.consumer.fetcher import ConsumerRecord
 import json
 from flasgger import Swagger
+from flask_cors import CORS
 
 app = flask.Flask(__name__)
 swagger = Swagger(app)
+CORS(app)
 
 @app.route('/', methods=['GET'])
 def home():
