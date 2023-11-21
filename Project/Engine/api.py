@@ -224,11 +224,6 @@ def getStatusArena(round):
     except Exception as e:
             return f"Erreur interne du serveur : {str(e)}", 500
 
-@app.route('/kafka', methods=['GET'])
-def endPoint():
-    # Faire la methode kafka
-    return "kafka"
-
 if __name__ == "__main__" :
     engine = Engine()
     arena = Arena(engine._arena)
