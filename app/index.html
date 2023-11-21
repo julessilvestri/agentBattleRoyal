@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -10,6 +10,54 @@
 
 <body>
     <div id="characterResults"></div>
+    <script src="public/js/main.js"></script>
+</body>
+
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="public/css/style.css">
+    <title>Informations sur les Personnages</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <!-- 
+        Afficher la liste des personnages --
+        Afficher les infos de chaque personnage --
+        Graph point de vide des perso --
+        Statistique chaque perso graphe araigné --
+        Bloc de logs (Infos du jeu mode console)
+        Classement par or
+        Trié par arène et par round
+     -->
+    <div class="header">
+        <h1>Personnages</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="details">
+            <div id="character-list">
+                <!-- La liste des personnages sera affichée ici -->
+            </div>
+            
+            
+            <div id="chart-container">
+                <canvas id="health-chart"></canvas>
+            </div>
+        </div>
+        <div id="character-details">
+            <!-- Les détails du personnage sélectionné seront affichés ici -->
+        </div>
+    </div>
+
     <script src="public/js/main.js"></script>
 </body>
 

@@ -1,35 +1,72 @@
-*{
+body {
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
 }
 
-body{
-    width: 100%;
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    height: 100vh;
+    background-color: #f0f0f0;
 }
 
-.get-method{
-    color: dodgerblue;
+.details {
+    flex: 1;
+    padding: 20px;
 }
 
-.post-method{
-    color: red;
+#character-list {
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #fff;
 }
 
-.bloc-field{
-    width: 90%;
-    height: 100px;
-    background-color: rgb(233, 233, 233);
-    border-radius: 20px;
-    margin-left: 3%;
-    margin-top: 50px;
-    padding: 2%;
+#chart-container {
+    margin-top: 20px;
+    width: 700px;
 }
 
-.button-execute{
-    width: 150px;
-    height: 40px;
-    background-color: blue;
-    border: 0;
-    border-radius:10px;
-    color: white;
+#health-chart {
+    border: 1px solid #ccc;
 }
+
+#character-details {
+    flex: 1;
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+
+#character-chart {
+    flex: 1;
+    padding-left: 200px;
+    padding-right: 200px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+
+#character-details p {
+    margin: 0;
+}
+
+#character-list a {
+    display: block;
+    padding: 10px;
+    margin-bottom: 5px;
+    text-decoration: none;
+    color: #333;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+#character-list a:hover {
+    background-color: #ddd;
+}
+
+/* canvas {
+    max-width: 100%;
+    height: auto;
+} */
