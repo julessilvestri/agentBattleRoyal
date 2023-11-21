@@ -14,28 +14,28 @@ def makeRequest(url, data):
 
 characterData = [
     {
-        "cid": "Jules",
+        "cid": "Zeus",
         "team": "team1",
-        "life": 15,
-        "strength": 25,
-        "armor": 30,
-        "speed": 15
+        "life": 5,
+        "strength": 3,
+        "armor": 7,
+        "speed": 5
     },
     {
-        "cid": "Ahmed",
+        "cid": "Athéna",
         "team": "team2",
-        "life": 10,
-        "strength": 5,
-        "armor": 3,
-        "speed": 17
+        "life": 3,
+        "strength": 6,
+        "armor": 7,
+        "speed": 4
     },
     {
-        "cid": "Anis",
+        "cid": "Poséidon",
         "team": "team3",
-        "life": 10,
+        "life": 4,
         "strength": 5,
-        "armor": 3,
-        "speed": 17
+        "armor": 1,
+        "speed": 10
     }
 ]
 
@@ -44,9 +44,9 @@ for character in characterData :
 
 actionData = [
     {
-        "cid": "Jules",
+        "cid": "Zeus",
         "action": "ACTION.HIT",
-        "target": "Ahmed"
+        "target": "Poséidon"
     }
 ]
 

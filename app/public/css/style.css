@@ -46,6 +46,11 @@ body {
     background-color: #fff;
 }
 
+#character-item {
+    flex: 1;
+    padding: 50px;
+}
+
 #character-details p {
     margin: 0;
 }
