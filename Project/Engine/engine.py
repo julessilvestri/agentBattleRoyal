@@ -20,9 +20,11 @@ class Engine:
         self._characterTimeout = characterTimeout
 
     def setActionTo(self, cid, action):
+        print(cid , " -> " , action)
         return self._arena.setActionTo(cid, action)
 
     def setTargetTo(self, cid, target):
+        print("CHAT")
         return self._arena.setTargetTo(cid, target)
 
     def getPlayerByName(self, cid):
@@ -44,6 +46,10 @@ class Engine:
     def isReady(self):
         flag = self._arena.getActiveNbPlayer() >= 2
         flag &= self._arena.everyoneHasAnAction()
+
+        print("getActiveNbPlayer => " + str(self._arena.getActiveNbPlayer() >= 2))
+        print("everyoneHasAnAction => " + str(self._arena.everyoneHasAnAction()))
+
         return flag
     
     def stop(self):
@@ -120,15 +126,18 @@ class Engine:
             self._run = True
             self._data.addData("start_game", "")
             # battleroyal, we continue the fight until there is only 1 character left
-            # while self._run:       
-            self.single_run()                
-                # # save logs
-                # self._data.save()
-                # while not self.isReady():
-                #     # At some point, remove characters that take too long to send their next action
-                #     time.sleep(self._characterTimeout)
-                #     # remove inactive characters
-                #     self._arena.removeAfkPlayers()
+            while self._run:       
+                print("ping")               
+                self.single_run()
+                # save logs
+                self._data.save()
+                while not self.isReady():
+                    print("data => " , self._data._history)
+                    print("Waiting players...")
+                    # At some point, remove characters that take too long to send their next action
+                    time.sleep(self._characterTimeout)
+                    # remove inactive characters
+                    # self._arena.removeAfkPlayers()
         else:
             raise Exception("Game is already running !")
 

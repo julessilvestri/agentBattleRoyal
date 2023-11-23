@@ -6,6 +6,8 @@ class Arena:
         self._data = data
 
     def setActionTo(self, cid, action):
+        print(action)
+        print(action == 0)
         flag = False
         for character in self._playersList:
             if character.isId(cid):
@@ -78,6 +80,7 @@ class Arena:
         for character in self._playersList:
             if not character.isDead():
                 cAction, cTarget = character.getAction()
+                # print("cAction => " + str(cAction))
                 if cAction == None or ((cAction == ACTION.HIT or cAction == ACTION.FLY)  and cTarget == None):
                     return False
         return True

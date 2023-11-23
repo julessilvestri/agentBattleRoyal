@@ -13,9 +13,11 @@ swagger = Swagger(app)
 CORS(app)
 
 engine = Engine()
-    
-threadRequest = threading.Thread(target=app.run(debug=True)).start()
-# threadEngine = threading.Thread(target=engine.run()).start()
+
+if __name__ == "__main__":
+  app.run()
+
+threading.Thread(target=engine.run).start()
 
 @app.route('/', methods=['GET'])
 def home():
@@ -127,9 +129,6 @@ def addActionToPlayer():
         # Trouver le joueur correspondant dans l'arène
         # player = next((p for p in engine._arena._playersList if p._id == cid), None)
 
-        # Vérifier si le joueur a été trouvé
-        # if player:
-            # Attribuer l'action et la cible au joueur
         engine.setActionTo(cid, action)
         engine.setTargetTo(cid, target)
         return "Les actions des personnages ont été attribuées"
