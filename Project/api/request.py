@@ -36,6 +36,30 @@ characterData = [
         "strength": 5,
         "armor": 1,
         "speed": 10
+    },
+    {
+        "cid": "Héra",
+        "team": "team3",
+        "life": 2,
+        "strength": 7,
+        "armor": 3,
+        "speed": 8
+    },
+    {
+        "cid": "Apollon",
+        "team": "team3",
+        "life": 14,
+        "strength": 1,
+        "armor": 1,
+        "speed": 4
+    },
+    {
+        "cid": "Artémis",
+        "team": "team3",
+        "life": 2,
+        "strength": 2,
+        "armor": 14,
+        "speed": 2
     }
 ]
 

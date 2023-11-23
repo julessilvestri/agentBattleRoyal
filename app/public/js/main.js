@@ -12,6 +12,8 @@ $(document).ready(function () {
             const characterNames = data.map(character => character.cid);
             const characterHealth = data.map(character => character.life);
 
+            const maxHealth = characterHealth.reduce((a, b) => Math.max(a, b), -Infinity);
+
             // Créer le graphique à barres
             const healthChart = new Chart(healthChartCanvas, {
                 type: 'bar',
@@ -33,7 +35,7 @@ $(document).ready(function () {
                             }
                         },
                         y: {
-                            max: 20,
+                            max: maxHealth, // Valeur la plus grande de toutes les cractéristiques et tous les joueurs reunis
                             beginAtZero: true,
                             grid: {
                                 color: 'rgba(255, 255, 255, 0.5)'
@@ -53,6 +55,31 @@ $(document).ready(function () {
         type: 'GET',
         dataType: 'json',
         success: function (data) {
+            characterHealth = data.map(character => character.life);
+            characterStrength = data.map(character => character.strength);
+            characterArmor = data.map(character => character.armor);
+            characterSpeed = data.map(character => character.speed);
+
+            charactersPerf = []            
+
+            characterHealth.forEach(element => {
+                charactersPerf.push(element)
+            });
+
+            characterStrength.forEach(element => {
+                charactersPerf.push(element)
+            });
+
+            characterArmor.forEach(element => {
+                charactersPerf.push(element)
+            });
+
+            characterSpeed.forEach(element => {
+                charactersPerf.push(element)
+            });
+
+            maxPerf = charactersPerf.reduce((a, b) => Math.max(a, b), -Infinity);   
+
             for (var i = 0; i < data.length; i++) {
                 const character = {
                     name: data[i].cid,
@@ -77,6 +104,7 @@ $(document).ready(function () {
             console.log('Error:', error);
         }
     });
+
 
     function displayCharacterDetails(character) {
         const detailsHTML = `
@@ -106,7 +134,8 @@ $(document).ready(function () {
         // Créer le graphique radar
         const radarChartCanvas = $(`#radar-chart-${character.name}`);
         radarChartCanvas.attr('width', 50); // ou une autre valeur selon vos besoins
-        radarChartCanvas.attr('height', 50); // ou une autre valeur selon vos besoins
+        radarChartCanvas.attr('height', 50); // ou une autre valeur selon vos besoins      
+
         const radarChart = new Chart(radarChartCanvas, {
             type: 'radar',
             data: {
@@ -123,7 +152,7 @@ $(document).ready(function () {
                 scales: {
                     r: {
                         beginAtZero: true,
-                        max: 20,
+                        max: maxPerf,
                         grid: {
                             color: 'rgba(255, 255, 255, 0.5)',
                             circular: false
@@ -137,15 +166,15 @@ $(document).ready(function () {
 
         // Ajouter un écouteur d'événements pour le clic sur le bouton
         toggleButton.addEventListener('click', function () {
-            
+
             // Inverser la valeur de circular entre true et false
             const currentCircularValue = radarChart.options.scales.r.grid.circular;
             radarChart.options.scales.r.grid.circular = !currentCircularValue;
-            
+
             console.log("toggle");
             // Mettre à jour le graphique
             radarChart.update();
-            
+
         });
     }
 });
