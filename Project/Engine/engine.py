@@ -120,15 +120,16 @@ class Engine:
             self._run = True
             self._data.addData("start_game", "")
             # battleroyal, we continue the fight until there is only 1 character left
-            # while self._run:       
-            self.single_run()                
-                # # save logs
-                # self._data.save()
-                # while not self.isReady():
-                #     # At some point, remove characters that take too long to send their next action
-                #     time.sleep(self._characterTimeout)
-                #     # remove inactive characters
-                #     self._arena.removeAfkPlayers()
+            while self._run:       
+                self.single_run()                
+                # save logs
+                self._data.save()
+                print("Waiting players ...")
+                while not self.isReady():
+                    # At some point, remove characters that take too long to send their next action
+                    time.sleep(self._characterTimeout)
+                    # remove inactive characters
+                    self._arena.removeAfkPlayers()
         else:
             raise Exception("Game is already running !")
 

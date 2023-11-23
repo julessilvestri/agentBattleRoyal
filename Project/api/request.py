@@ -17,7 +17,7 @@ characterData = [
         "cid": "Zeus",
         "team": "team1",
         "life": 5,
-        "strength": 3,
+        "strength": 6,
         "armor": 7,
         "speed": 5
     },
@@ -28,39 +28,40 @@ characterData = [
         "strength": 6,
         "armor": 7,
         "speed": 4
-    },
-    {
-        "cid": "Poséidon",
-        "team": "team3",
-        "life": 4,
-        "strength": 5,
-        "armor": 1,
-        "speed": 10
-    },
-    {
-        "cid": "Héra",
-        "team": "team3",
-        "life": 2,
-        "strength": 7,
-        "armor": 3,
-        "speed": 8
-    },
-    {
-        "cid": "Apollon",
-        "team": "team3",
-        "life": 14,
-        "strength": 1,
-        "armor": 1,
-        "speed": 4
-    },
-    {
-        "cid": "Artémis",
-        "team": "team3",
-        "life": 2,
-        "strength": 2,
-        "armor": 14,
-        "speed": 2
     }
+    # ,
+    # {
+    #     "cid": "Poséidon",
+    #     "team": "team3",
+    #     "life": 4,
+    #     "strength": 5,
+    #     "armor": 1,
+    #     "speed": 10
+    # },
+    # {
+    #     "cid": "Héra",
+    #     "team": "team3",
+    #     "life": 2,
+    #     "strength": 7,
+    #     "armor": 3,
+    #     "speed": 8
+    # },
+    # {
+    #     "cid": "Apollon",
+    #     "team": "team3",
+    #     "life": 14,
+    #     "strength": 1,
+    #     "armor": 1,
+    #     "speed": 4
+    # },
+    # {
+    #     "cid": "Artémis",
+    #     "team": "team3",
+    #     "life": 2,
+    #     "strength": 2,
+    #     "armor": 14,
+    #     "speed": 2
+    # }
 ]
 
 for character in characterData :
@@ -70,7 +71,12 @@ actionData = [
     {
         "cid": "Zeus",
         "action": "ACTION.HIT",
-        "target": "Poséidon"
+        "target": "Athéna"
+    },
+    {
+        "cid": "Athéna",
+        "action": "ACTION.HIT",
+        "target": "Zeus"
     }
 ]
 
