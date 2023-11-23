@@ -4,9 +4,6 @@ import sys
 from engine import *
 from character import *
 import threading
-from kafka import KafkaConsumer
-from kafka.errors import NoBrokersAvailable
-from kafka.consumer.fetcher import ConsumerRecord
 import json
 from flasgger import Swagger
 from flask_cors import CORS
