@@ -14,14 +14,8 @@ CORS(app)
 
 engine = Engine()
     
-# Define the thread for running the Flask app
-def run_flask():
-    app.run(debug=True)
-
-# Start the Flask app in a separate thread
-if __name__ == "__main__":
-    threadRequest = threading.Thread(target=run_flask)
-    threadRequest.start()
+# threadRequest = threading.Thread(target=app.run(debug=True)).start()
+# threadEngine = threading.Thread(target=engine.run()).start()
 
 @app.route('/', methods=['GET'])
 def home():
@@ -232,5 +226,3 @@ def getStatusArena(round):
     except Exception as e:
             return f"Erreur interne du serveur : {str(e)}", 500
 
-if __name__ == "__main__":
-    threadRequest.join()
