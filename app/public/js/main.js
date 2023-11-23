@@ -20,15 +20,24 @@ $(document).ready(function () {
                     datasets: [{
                         label: 'Points de vie',
                         data: characterHealth,
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(255, 112, 17, 0.7)',
+                        borderColor: 'rgba(255, 255, 255, 1)',
                         borderWidth: 1
                     }]
                 },
                 options: {
                     scales: {
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.5)'
+                            }
+                        },
                         y: {
-                            beginAtZero: true
+                            max: 20,
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.5)'
+                            }
                         }
                     }
                 }
@@ -71,7 +80,16 @@ $(document).ready(function () {
 
     function displayCharacterDetails(character) {
         const detailsHTML = `
-            <div id="character-chart"><canvas id="radar-chart-${character.name}" width="50px" height="50px"></canvas></div>
+            <div id="character-chart">
+                <canvas id="radar-chart-${character.name}" width="50px" height="50px"></canvas>
+            </div>
+            <div id="character-chart-settings">
+                <h3>Circle view</h3>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round" id="toggleButton"></span>
+                </label>
+            </div>
             <div id="character-item"><p>Nom : ${character.name}</p>
             <p>Equipe : ${character.team}</p>
             <p>Points de vie : ${character.life}</p>
@@ -96,18 +114,38 @@ $(document).ready(function () {
                 datasets: [{
                     label: 'Caractéristiques',
                     data: radarData,
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(255, 112, 17, 0.7)',
+                    borderColor: 'rgba(255, 255, 255, 1)',
                     borderWidth: 1
                 }]
             },
             options: {
                 scales: {
                     r: {
-                        beginAtZero: true
+                        beginAtZero: true,
+                        max: 20,
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.5)',
+                            circular: false
+                        }
                     }
                 }
             }
+        });
+        // Récupérer le bouton par son ID
+        const toggleButton = document.getElementById('toggleButton');
+
+        // Ajouter un écouteur d'événements pour le clic sur le bouton
+        toggleButton.addEventListener('click', function () {
+            
+            // Inverser la valeur de circular entre true et false
+            const currentCircularValue = radarChart.options.scales.r.grid.circular;
+            radarChart.options.scales.r.grid.circular = !currentCircularValue;
+            
+            console.log("toggle");
+            // Mettre à jour le graphique
+            radarChart.update();
+            
         });
     }
 });
