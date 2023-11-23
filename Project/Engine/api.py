@@ -12,6 +12,11 @@ app = flask.Flask(__name__)
 swagger = Swagger(app)
 CORS(app)
 
+engine = Engine()
+    
+threadRequest = threading.Thread(target=app.run(debug=True)).start()
+# threadEngine = threading.Thread(target=engine.run()).start()
+
 @app.route('/', methods=['GET'])
 def home():
     return "Home"
@@ -73,7 +78,7 @@ def addCharacterToArena():
             characterData["speed"]
         )
         # Ajouter les players
-        arena.addPlayer(newPlayer)
+        engine.addPlayer(newPlayer)
         return f"{characterData['cid']} ajouté à l'arène avec succès"
     except Exception as e:
         return f"Erreur interne du serveur : {str(e)}", 500
@@ -120,14 +125,14 @@ def addActionToPlayer():
         target = actionData.get("target")
 
         # Trouver le joueur correspondant dans l'arène
-        player = next((p for p in arena._playersList if p._id == cid), None)
+        # player = next((p for p in engine._arena._playersList if p._id == cid), None)
 
         # Vérifier si le joueur a été trouvé
-        if player:
+        # if player:
             # Attribuer l'action et la cible au joueur
-            player.setAction(action)
-            player.setTarget(target)
-            return "Les actions des personnages ont été attribuées"
+        engine.setActionTo(cid, action)
+        engine.setTargetTo(cid, target)
+        return "Les actions des personnages ont été attribuées"
     except Exception as e:
         return f"Erreur interne du serveur : {str(e)}", 500
 
@@ -160,7 +165,7 @@ def getPlayerById(cid):
         description: Player not found
     """
     try:
-        playerList = [player.toDict() for player in arena._playersList]
+        playerList = [player.toDict() for player in engine._arena._playersList]
         player = next((p for p in playerList if p["cid"] == cid), None)
         if player:
             return jsonify(player)
@@ -187,7 +192,7 @@ def getAllPlayer():
         description: Internal server error
     """
     try:
-        playerList = [player.toDict() for player in arena._playersList]
+        playerList = [player.toDict() for player in engine._arena._playersList]
         return jsonify(playerList)
     except Exception as e:
             return f"Erreur interne du serveur : {str(e)}", 500
@@ -220,10 +225,3 @@ def getStatusArena(round):
         return jsonify(engine.getState())
     except Exception as e:
             return f"Erreur interne du serveur : {str(e)}", 500
-
-if __name__ == "__main__" :
-    engine = Engine()
-    arena = Arena(engine._arena)
-
-    threadEngine = threading.Thread(target=engine.run()).start
-    threadRequest = threading.Thread(target =  app.run(debug=True)).start
