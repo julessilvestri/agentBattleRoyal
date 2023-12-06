@@ -25,6 +25,7 @@
     <title>Informations sur les Personnages</title>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.2.2/socket.io.js"></script> -->
 </head>
 
 <body>
@@ -42,12 +43,12 @@
     </div>
 
     <div class="container">
-        
+
         <div class="details">
             <div id="character-list">
                 <!-- La liste des personnages est affichée ici -->
-            </div>            
-            
+            </div>
+
             <div id="chart-container">
                 <canvas id="health-chart"></canvas>
             </div>
@@ -56,8 +57,23 @@
             <!-- Les détails du personnage sélectionné sont affichés ici -->
         </div>
     </div>
+    <h1>Messages Kafka en temps réel</h1>
+    <ul id="message-list"></ul>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.2.2/socket.io.js"></script>
+    <script>
+        const socket = io();
+
+        socket.on('message', (message) => {
+            const messageList = document.getElementById('message-list');
+            const listItem = document.createElement('li');
+            listItem.textContent = message;
+            messageList.appendChild(listItem);
+        });
+    </script>
 
     <script src="public/js/main.js"></script>
+    <script src="public/js/consumer.js"></script>
 </body>
 
 </html>
