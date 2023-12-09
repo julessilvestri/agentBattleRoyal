@@ -6,8 +6,6 @@ from data import *
 import time
 import json
 
-
-
 class Engine:
     def __init__(self, minPlayersToStart :int = 2, characterTimeout :int = 5):
         self._turnId = 0
@@ -116,6 +114,8 @@ class Engine:
             character.setTarget(None)
         for leaver in leavers:
             self._arena.removePlayer(leaver)
+
+        
         
         # Passe au prochain tour
         self._turnId += 1
@@ -126,8 +126,7 @@ class Engine:
             self._run = True
             self._data.addData("start_game", "")
             # battleroyal, we continue the fight until there is only 1 character left
-            while self._run:       
-                print("ping")               
+            while self._run:              
                 self.single_run()
                 # save logs
                 self._data.save()

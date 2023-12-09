@@ -13,7 +13,7 @@ conf_cloud = {
 producer = Producer(conf_cloud)
 
 topic = 'topicKafka'
-message_key = 'cle_du_message'
+message_key = 'key'
 
 with open('../Engine/data.json') as f:
     json_content = json.load(f)

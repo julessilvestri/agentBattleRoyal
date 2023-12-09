@@ -1,22 +1,5 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AJAX Request Example</title>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-</head>
-
-<body>
-    <div id="characterResults"></div>
-    <script src="public/js/main.js"></script>
-</body>
-
-</html> -->
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -25,19 +8,10 @@
     <title>Informations sur les Personnages</title>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.2.2/socket.io.js"></script> -->
 </head>
 
 <body>
-    <!-- 
-        Afficher la liste des personnages --
-        Afficher les infos de chaque personnage --
-        Graph point de vide des perso --
-        Statistique chaque perso graphe araigné --
-        Bloc de logs (Infos du jeu mode console)
-        Classement par or
-        Trié par arène et par round
-     -->
+
     <div class="header">
         <h1>Agent Battle Royal</h1>
     </div>
@@ -60,20 +34,7 @@
     <h1>Messages Kafka en temps réel</h1>
     <ul id="message-list"></ul>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.2.2/socket.io.js"></script>
-    <script>
-        const socket = io();
-
-        socket.on('message', (message) => {
-            const messageList = document.getElementById('message-list');
-            const listItem = document.createElement('li');
-            listItem.textContent = message;
-            messageList.appendChild(listItem);
-        });
-    </script>
-
     <script src="public/js/main.js"></script>
-    <script src="public/js/consumer.js"></script>
 </body>
 
 </html>

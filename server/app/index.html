@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Battle Royal</title>
+    <link rel="stylesheet" href="public/css/style.css">
+</head>
+
+<body>
+    <h1>Simulateur d'Arène - Dashboard</h1>
+    
+    <div id="dashboard">
+        <!-- Graphique des récompenses -->
+        <div>
+            <h2>Récompenses par Personnage</h2>
+            <canvas id="rewards-chart" width="400" height="300"></canvas>
+        </div>
+        
+        <!-- Classement des personnages -->
+        <div>
+            <h2>Classement</h2>
+            <ol id="ranking-list">
+                <!-- Les éléments de classement seront ajoutés dynamiquement ici -->
+            </ol>
+        </div>
+        
+        <!-- Zone de combat log -->
+        <div id="combat-log">
+            <h2>Combat Log</h2>
+            <ul id="log-list">
+                <!-- Les actions de combat seront ajoutées dynamiquement ici -->
+            </ul>
+        </div>
+    </div>
+    <p id="messages"></p>
+
+    <!-- Chart JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="public/js/chart.js"></script>
+    
+    <!-- Socket io -->
+    <script src="socket.io/socket.io.js"></script>
+    <script src="public/js/io.js"></script>
+</body>
+
+</html>
