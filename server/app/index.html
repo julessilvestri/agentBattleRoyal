@@ -10,14 +10,14 @@
 
 <body>
     <h1>Simulateur d'Arène - Dashboard</h1>
-    
+
     <div id="dashboard">
         <!-- Graphique des récompenses -->
         <div>
             <h2>Récompenses par Personnage</h2>
             <canvas id="rewards-chart" width="400" height="300"></canvas>
         </div>
-        
+
         <!-- Classement des personnages -->
         <div>
             <h2>Classement</h2>
@@ -25,7 +25,7 @@
                 <!-- Les éléments de classement seront ajoutés dynamiquement ici -->
             </ol>
         </div>
-        
+
         <!-- Zone de combat log -->
         <div id="combat-log">
             <h2>Combat Log</h2>
@@ -36,13 +36,13 @@
     </div>
     <p id="messages"></p>
 
-    <!-- Chart JS -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="public/js/chart.js"></script>
-    
-    <!-- Socket io -->
+        <!-- Socket io -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="socket.io/socket.io.js"></script>
     <script src="public/js/io.js"></script>
+
+    <!-- Chart JS -->
+    <script src="public/js/chart.js"></script>
 </body>
 
 </html>

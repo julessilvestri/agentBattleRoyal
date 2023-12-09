@@ -16,10 +16,10 @@ actionData = [
     {
         "cid": "Zeus",
         "action": 0,
-        "target": "Athéna"
+        "target": "Athena"
     },
     {
-        "cid": "Athéna",
+        "cid": "Athena",
         "action": 0,
         "target": "Zeus"
     }

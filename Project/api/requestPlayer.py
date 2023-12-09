@@ -22,7 +22,7 @@ characterData = [
         "speed": 5
     },
     {
-        "cid": "Athéna",
+        "cid": "Athena",
         "team": "team2",
         "life": 3,
         "strength": 0,
