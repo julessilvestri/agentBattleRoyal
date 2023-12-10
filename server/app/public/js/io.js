@@ -41,6 +41,12 @@ var rewardsChart = new Chart(ctx, {
     }
 });
 
+function updateLifeChart(characterList, lifeList) {
+    rewardsChart.data.labels = characterList;
+    rewardsChart.data.datasets[0].data = lifeList;
+    rewardsChart.update();
+}
+
 socket.on('message', (data) => {
     try {
         characterList = []
@@ -67,10 +73,8 @@ socket.on('message', (data) => {
 
             console.log(characterLifeList);
 
-            rewardsChart.data.labels = characterList;
-            rewardsChart.data.datasets[0].data = characterLifeList;
-            rewardsChart.update();
-
+            // Mettre à jour le graphique avec la vie actuelle des personnages
+            updateLifeChart(characterList, characterLifeList);
         }
         if (objetJSON.gold != undefined) {
             var goldList = objetJSON.gold
@@ -124,10 +128,9 @@ socket.on('message', (data) => {
                 //LOG RES ACTIONS
         var logList = document.getElementById('log-list');
 
-        // Vérifiez si l'événement 'damage' existe dans la réponse JSON
-        if (objetJSON.damage !== undefined && objetJSON.damage.length > 0) {
-            // Obtenez le numéro du tour à partir du premier élément de 'turn_id'
-            var tourId = objetJSON.turn_id[0][1];
+        if (objetJSON.turn_id !== undefined && objetJSON.turn_id.length > 0) {
+            // Obtenez le numéro du tour à partir de la longueur de 'turn_id'
+            var tourId = objetJSON.turn_id.length;
 
             // Parcourez chaque événement 'damage' et ajoutez un message au log
             objetJSON.damage.forEach(function (damageEvent) {
@@ -157,6 +160,7 @@ socket.on('message', (data) => {
             listItem.textContent = action;
             logList.appendChild(listItem);
         });
+        
     } catch (erreur) {
         console.error("Erreur lors de l'analyse JSON : ", erreur.message);
     }
