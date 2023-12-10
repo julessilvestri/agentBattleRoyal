@@ -9,6 +9,7 @@ request.send();
 
 let characterList = []
 let characterLifeList = []
+let goldList = {};
 
 var ctx = document.getElementById('rewards-chart').getContext('2d');
 var rewardsChart = new Chart(ctx, {
@@ -92,18 +93,64 @@ socket.on('message', (data) => {
             console.log(turnIdList)
         }
 
-        var rankingList = document.getElementById('ranking-list');
         var characters = characterList; // Remplacez par les noms de vos personnages
 
-        characters.forEach(function (character) {
-            var listItem = document.createElement('li');
-            listItem.textContent = character;
-            rankingList.appendChild(listItem);
-        });
+        if (objetJSON.gold != undefined) {
+            var goldListArray = objetJSON.gold;
 
-        // Exemple de mise à jour du log de combat
+            // Mettez à jour goldList avec les nouvelles valeurs
+            goldListArray.forEach(([timestamp, values]) => {
+                Object.entries(values).forEach(([character, gold]) => {
+                    goldList[character] = gold;
+                });
+            });
+
+            // Trier les personnages en fonction de leur or
+            characters.sort(function(a, b) {
+                return goldList[b] - goldList[a];
+            });
+
+            // Mettre à jour le classement dans le HTML
+            var rankingList = document.getElementById('ranking-list');
+            rankingList.innerHTML = ''; // Efface le contenu précédent
+
+            characters.forEach(function (character) {
+                var listItem = document.createElement('li');
+                listItem.textContent = character + ' - Gold: ' + goldList[character];
+                rankingList.appendChild(listItem);
+            });
+        }
+
+                //LOG RES ACTIONS
         var logList = document.getElementById('log-list');
-        var combatLog = ['Personnage 1 frappe Personnage 2', 'Personnage 3 esquive']; // Remplacez par les actions réelles du combat
+
+        // Vérifiez si l'événement 'damage' existe dans la réponse JSON
+        if (objetJSON.damage !== undefined && objetJSON.damage.length > 0) {
+            // Obtenez le numéro du tour à partir du premier élément de 'turn_id'
+            var tourId = objetJSON.turn_id[0][1];
+
+            // Parcourez chaque événement 'damage' et ajoutez un message au log
+            objetJSON.damage.forEach(function (damageEvent) {
+                var timestamp = damageEvent[0];
+                var damageData = damageEvent[1];
+
+                // Construisez le message en fonction des données de dégâts et du numéro du tour
+                var message = "Tour " + tourId + ": " + damageData.character + " fait " + damageData.damage + " dégât(s) à " + damageData.target;
+
+                // Créez un élément de liste pour chaque message
+                var listItem = document.createElement('li');
+                listItem.textContent = message;
+
+                // Ajoutez l'élément de liste au log
+                logList.appendChild(listItem);
+            });
+        } else {
+            // Si aucun événement 'damage', ajoutez un message spécial au log
+            var listItem = document.createElement('li');
+            listItem.textContent = 'Aucun dégât à rapporter';
+
+            logList.appendChild(listItem);
+        }
 
         combatLog.forEach(function (action) {
             var listItem = document.createElement('li');
