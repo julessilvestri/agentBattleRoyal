@@ -56,7 +56,14 @@ class CharacterProxy:
         self._speed = value
 
     def setAction(self, value):
-        self._action = value
+        if isinstance(value, str):
+            try:
+                self._action = ACTION[value]
+            except:
+                self._action = str(None)
+                raise ValueError("Action " + value + " does not exist")
+        elif isinstance(value, ACTION):
+            self._action = str(value.name)
     
     def setTarget(self, value):
         self._target = value

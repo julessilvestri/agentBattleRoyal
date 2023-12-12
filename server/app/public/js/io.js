@@ -1,14 +1,8 @@
 const socket = io();
 
-var requestURL = "https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json";
-
-var request = new XMLHttpRequest();
-request.open("GET", requestURL);
-request.responseType = "json";
-request.send();
-
-let characterList = []
-let characterLifeList = []
+let characterList = [];
+let characterLifeList = [];
+let goldList = {};
 
 var ctx = document.getElementById('rewards-chart').getContext('2d');
 var rewardsChart = new Chart(ctx, {
@@ -40,76 +34,86 @@ var rewardsChart = new Chart(ctx, {
     }
 });
 
+function updateLifeChart(characterList, lifeList) {
+    rewardsChart.data.labels = characterList;
+    rewardsChart.data.datasets[0].data = lifeList;
+    rewardsChart.update();
+}
+
+function calculateCurrentLife(enterArenaData, setTargetLogs) {
+    const currentLife = {};
+
+    // Initialise les points de vie max pour chaque personnage
+    enterArenaData.forEach(entry => {
+        const characterId = entry[1].cid;
+        const maxLife = entry[1].life;
+        currentLife[characterId] = {
+            life: maxLife,
+            action: "None",
+            target: null,
+            dead: false
+        };
+    });
+
+    // Parcourez les logs de set_target pour mettre à jour les points de vie et autres informations
+    setTargetLogs.forEach(targetLog => {
+        const timestamp = targetLog[0];
+        const targetData = targetLog[1];
+
+        const targetId = targetData.cid;
+        const damage = targetData.damage;
+
+        // Met à jour les points de vie du personnage cible
+        if (currentLife[targetId] !== undefined) {
+            if (targetData.action !== undefined && targetData.action !== null) {
+                // Utilise la valeur réelle de l'action si elle est spécifiée
+                currentLife[targetId].action = targetData.action;
+            } else {
+                // Sinon, utilise "None" comme valeur par défaut
+                currentLife[targetId].action = "None";
+            }
+
+            if (targetData.action === 0) {
+                // C'est une attaque, enlevez des points de vie
+                currentLife[targetId].life -= damage;
+
+                // Assurez-vous que les points de vie ne deviennent pas négatifs
+                if (currentLife[targetId].life < 0) {
+                    currentLife[targetId].life = 0;
+                }
+            }
+
+            // Mettez à jour d'autres informations telles que la cible et le statut "dead"
+            currentLife[targetId].target = targetData.target;
+            currentLife[targetId].dead = targetData.dead;
+        } else {
+            console.error("Erreur : Aucun personnage trouvé avec l'ID", targetId);
+        }
+    });
+
+    console.log(currentLife);
+    return currentLife;
+}
+
 socket.on('message', (data) => {
     try {
-        characterList = []
-        characterLifeList = []
-
         var objetJSON = JSON.parse(data.value);
-        console.log(objetJSON);
 
-        if (objetJSON.damage != undefined) {
-            var damageList = objetJSON.damage
-            console.log(damageList)
-        }
-        if (objetJSON.death != undefined) {
-            var deathList = objetJSON.death
-            console.log(deathList)
-        }
-        if (objetJSON.enter_arena != undefined) {
-            var enterArenaList = objetJSON.enter_arena
+        if (objetJSON.enter_arena !== undefined && objetJSON.set_target !== undefined) {
+            const enterArenaData = objetJSON.enter_arena;
+            const setTargetLogs = objetJSON.set_target;
 
-            enterArenaList.forEach(character => {
-                characterList.push(character[1].cid);
-                characterLifeList.push(character[1].life);
-            });
+            // Calculer les points de vie actuels
+            const currentLife = calculateCurrentLife(enterArenaData, setTargetLogs);
 
-            console.log(characterLifeList);
+            // Faites ce que vous voulez avec les points de vie actuels
+            console.log("currentLife");
+            console.log(currentLife);
 
-            rewardsChart.data.labels = characterList;
-            rewardsChart.data.datasets[0].data = characterLifeList;
-            rewardsChart.update();
-
-        }
-        if (objetJSON.gold != undefined) {
-            var goldList = objetJSON.gold
-            console.log(goldList)
-        }
-        if (objetJSON.set_action != undefined) {
-            var setActionList = objetJSON.set_action
-            console.log(setActionList)
-        }
-        if (objetJSON.set_target != undefined) {
-            var setTargetList = objetJSON.set_target
-            console.log(setTargetList)
-        }
-        if (objetJSON.start_game != undefined) {
-            var startGameList = objetJSON.start_game
-            console.log(startGameList)
-        }
-        if (objetJSON.turn_id != undefined) {
-            var turnIdList = objetJSON.turn_id
-            console.log(turnIdList)
+            // Mettre à jour le graphique avec la vie actuelle des personnages
+            updateLifeChart(Object.keys(currentLife), currentLife.map(character => character.life));
         }
 
-        var rankingList = document.getElementById('ranking-list');
-        var characters = characterList; // Remplacez par les noms de vos personnages
-
-        characters.forEach(function (character) {
-            var listItem = document.createElement('li');
-            listItem.textContent = character;
-            rankingList.appendChild(listItem);
-        });
-
-        // Exemple de mise à jour du log de combat
-        var logList = document.getElementById('log-list');
-        var combatLog = ['Personnage 1 frappe Personnage 2', 'Personnage 3 esquive']; // Remplacez par les actions réelles du combat
-
-        combatLog.forEach(function (action) {
-            var listItem = document.createElement('li');
-            listItem.textContent = action;
-            logList.appendChild(listItem);
-        });
     } catch (erreur) {
         console.error("Erreur lors de l'analyse JSON : ", erreur.message);
     }

@@ -118,23 +118,16 @@ def addActionToPlayer():
         description: Internal server error
     """
     try:
-        # Récupérer les données JSON de la requête
-        actionData = request.get_json()
-
-        # Extraire les informations de l'action
-        cid = actionData.get("cid")
-        action = actionData.get("action")
-        target = actionData.get("target")
-
-        # Trouver le joueur correspondant dans l'arène
-        # player = next((p for p in engine._arena._playersList if p._id == cid), None)
-
+        data = request.json
+        cid = data.get('cid')
+        action = data.get('action')
+        target = data.get('target')
         engine.setActionTo(cid, action)
         engine.setTargetTo(cid, target)
-        return "Les actions des personnages ont été attribuées"
+        message = "Action set to " + str(action) + " for " + str(cid) + " on " + str(target)
+        return jsonify(message=message)
     except Exception as e:
-        return f"Erreur interne du serveur : {str(e)}", 500
-
+        return str(e), 500
 # -------------------------------------
 
 
