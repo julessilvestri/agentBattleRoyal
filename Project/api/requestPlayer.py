@@ -28,8 +28,15 @@ characterData = [
         "strength": 0,
         "armor": 7,
         "speed": 4
+    },
+    {
+        "cid": "Colin",
+        "team": "team2",
+        "life": 10,
+        "strength": 1,
+        "armor": 8,
+        "speed": 1
     }
-
 ]
 
 for character in characterData :

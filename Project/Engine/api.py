@@ -119,7 +119,7 @@ def addActionToPlayer():
     """
     try:
         data = request.json
-        cid = data.get('cid')
+        cid = data.get('cid')actionToStr
         action = data.get('action')
         target = data.get('target')
         engine.setActionTo(cid, action)

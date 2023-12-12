@@ -22,6 +22,11 @@ actionData = [
         "cid": "Athena",
         "action": 0,
         "target": "Zeus"
+    },
+    {
+        "cid": "Colin",
+        "action": 1,
+        "target": "Colin"
     }
 ]
 

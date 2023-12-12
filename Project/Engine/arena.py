@@ -4,25 +4,13 @@ class Arena:
     def __init__(self, data):
         self._playersList = []
         self._data = data
-
+    
     def setActionTo(self, cid, action):
-        print(action)
-        print(action == 0)
         flag = False
         for character in self._playersList:
             if character.isId(cid):
-                if action == 0:
-                    character.setAction(ACTION.HIT)
-                    flag = True
-                elif action == 1:
-                    character.setAction(ACTION.BLOCK)
-                    flag = True
-                elif action == 2:
-                    character.setAction(ACTION.DODGE)
-                    flag = True
-                elif action == 3:
-                    character.setAction(ACTION.FLY)
-                    flag = True
+                character.setAction(action)
+                flag = True
                 self._data.addData("set_action", character.toDict())
         return flag
 

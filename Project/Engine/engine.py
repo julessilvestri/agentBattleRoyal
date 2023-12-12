@@ -18,11 +18,11 @@ class Engine:
         self._characterTimeout = characterTimeout
 
     def setActionTo(self, cid, action):
-        print(cid , " -> " , action)
+        print("Action ",cid , " -> " , action)
         return self._arena.setActionTo(cid, action)
-
+        
     def setTargetTo(self, cid, target):
-        print("CHAT")
+        print("Target ",cid , " -> " , action)
         return self._arena.setTargetTo(cid, target)
 
     def getPlayerByName(self, cid):
@@ -121,7 +121,7 @@ class Engine:
         self._turnId += 1
         self._data.addData("turn_id", self._turnId)
 
-    def run(self):        
+    def run(self):       
         if not self._run:
             self._run = True
             self._data.addData("start_game", "")
