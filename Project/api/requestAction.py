@@ -15,18 +15,18 @@ def makeRequest(url, data):
 actionData = [
     {
         "cid": "Zeus",
-        "action": 0,
+        "action": "HIT",
         "target": "Athena"
     },
     {
         "cid": "Athena",
-        "action": 0,
+        "action": "HIT",
         "target": "Zeus"
     },
     {
         "cid": "Colin",
-        "action": 1,
-        "target": "Colin"
+        "action": "DODGE",
+        "target": "None"
     }
 ]
 

@@ -22,7 +22,7 @@ class Engine:
         return self._arena.setActionTo(cid, action)
         
     def setTargetTo(self, cid, target):
-        print("Target ",cid , " -> " , action)
+        print("Target ",cid , " -> " , target)
         return self._arena.setTargetTo(cid, target)
 
     def getPlayerByName(self, cid):
